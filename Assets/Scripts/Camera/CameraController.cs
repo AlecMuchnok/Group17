@@ -24,6 +24,6 @@ public class CameraController : MonoBehaviour {
 		transform.localRotation = Quaternion.AngleAxis(-rotation, Vector3.right);
 
 		//Move camera
-		transform.localPosition = new Vector3(1, -2 * Mathf.Sin(rotation), -2 * Mathf.Cos(rotation));
+		//transform.localPosition = new Vector3(1, -2 * Mathf.Sin(rotation), -2 * Mathf.Cos(rotation));
 	}
 }
