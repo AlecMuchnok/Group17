@@ -20,7 +20,7 @@ public class Level : MonoBehaviour {
 					go.transform.parent = transform;
 
 					//Move room to correct space
-					go.transform.localPosition = new Vector3(3 * (j / 2), 0, 3 * ((map.Length - 1 - i) / 2));
+					go.transform.localPosition = new Vector3(3 * (j / 2), map[i][j] / 2f, 3 * ((map.Length - 1 - i) / 2));
 
 					/*
 					 * Children of room
@@ -50,6 +50,31 @@ public class Level : MonoBehaviour {
 					//West
 					if (j > 0 && map [i] [j - 2] != '0' && !(map[i][j - 1] == ','))
 						go.transform.GetChild (5).gameObject.SetActive (false);
+
+					//Add low walls between rooms of differing height
+					//North
+					if (i > 0 && map[i - 2][j] != '0' && map [i] [j] > map [i - 2] [j]) {
+						go.transform.GetChild (2).gameObject.SetActive (true);
+						go.transform.GetChild (2).transform.localPosition -= new Vector3 (0, 3, 0);
+					}
+
+					//East
+					if (j < map.Length - 1 && map[i][j + 2] != '0' && map [i] [j] > map [i] [j + 2]) {
+						go.transform.GetChild (3).gameObject.SetActive (true);
+						go.transform.GetChild (3).transform.localPosition -= new Vector3 (0, 3, 0);
+					}
+
+					//South
+					if (i < map.Length - 1 && map[i + 2][j] != '0' && map [i] [j] > map [i + 2] [j]) {
+						go.transform.GetChild (4).gameObject.SetActive (true);
+						go.transform.GetChild (4).transform.localPosition -= new Vector3 (0, 3, 0);
+					}
+
+					//West
+					if (j > 0 && map[i][j - 2] != '0' && map [i] [j] > map [i] [j - 2]) {
+						go.transform.GetChild (5).gameObject.SetActive (true);
+						go.transform.GetChild (5).transform.localPosition -= new Vector3 (0, 3, 0);
+					}
 				}
 			}
 		}
